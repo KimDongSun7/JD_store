@@ -1,4 +1,4 @@
-package com.kh.jdstore;
+package com.kh.jdstore.controller;
 
 import java.util.List;
 
