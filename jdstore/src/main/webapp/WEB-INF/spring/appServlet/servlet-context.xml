@@ -32,7 +32,7 @@
 	<mvc:annotation-driven></mvc:annotation-driven>
 	
 	<!-- 복사한 뒤 반드시 고쳐야 하는 부분 -->
-	<context:component-scan base-package="com.kh.jdstore" use-default-filters="false">
+	<context:component-scan base-package="com.kh.jdstore.controller" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!-- 복사한 뒤 반드시 고쳐야 하는 부분 -->
