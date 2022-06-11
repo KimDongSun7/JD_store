@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="insert" method="post">
+<form action="insert" method="post" enctype="multipart/form-data">
 	<div align="center">
 		<div>
 			<h1>상품 등록</h1>
@@ -33,6 +33,10 @@
 		<div>
 			<label>상품재고</label>
 			<input type="number" name="productStock" required>
+		</div>
+		<div>
+			<label>상품 이미지</label>
+			<input type="file" name="productImg" accept=".png, .jpg, .gif" multiple>
 		</div>
 		<div>
 			<button type="submit">등록</button>
