@@ -1,5 +1,8 @@
 package com.kh.jdstore.repository;
 
-public class MemberDao {
+import com.kh.jdstore.entity.MemberDto;
 
+public interface MemberDao {
+	
+	void join(MemberDto memberDto);
 }
