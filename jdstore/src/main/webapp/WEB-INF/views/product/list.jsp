@@ -23,7 +23,7 @@
 			<c:forEach var="productDto" items="${list}">
 			<tr>
 				<td>${productDto.productNo }</td>
-				<td><a href ="detail/${productDto.productName }">${productDto.productName }</a></td>
+				<td><a href ="detail?productNo=${productDto.productNo }">${productDto.productName }</a></td>
 				<td>${productDto.productCategory }</td>
 				<td>${productDto.productPrice }</td>
 				<td>${productDto.productStock }</td>

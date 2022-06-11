@@ -20,8 +20,17 @@ public class ProductDaoImpl implements ProductDao{
 		return sqlSession.selectList("product.list");
 	}
 
-	
+	@Override
+	public ProductDto detail(int productNo) {	
+		return sqlSession.selectOne("product.one",productNo);
+	}
 
+	@Override
+	public void insert(ProductDto productDto) {
+		int productNo = sqlSession.selectOne("product.sequence");
+		productDto.setProductNo(productNo);
+		sqlSession.insert("product.insert",productDto);
+	}
 	
 
 }
