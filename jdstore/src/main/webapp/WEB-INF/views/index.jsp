@@ -10,5 +10,8 @@
 	<h1>메인 화면</h1>
 	<a href="product/list">상품목록</a>
 	<a href="product/insert">상품등록</a>
+	<a href="member/join">회원가입</a>
+	<a href="member/login">로그인</a>
+	
 </body>
 </html>
