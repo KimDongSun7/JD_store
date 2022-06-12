@@ -1,5 +1,7 @@
 package com.kh.jdstore.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,21 +65,30 @@ public class MemberController {
 			@RequestParam String  memberId,
 			@RequestParam String memberPw,
 			@RequestParam String referer, 
-			HttpSession session) {
+			@RequestParam (required=false) String remember, 
+			HttpSession session,
+			HttpServletResponse response ){
 		MemberDto memberDto = memberDao.login(memberId, memberPw);
-		if(memberDto != null) { //로그인 성공 
-			return "redirect:" + referer; 
+		if(memberDto != null) {//로그인 성공
+			//세션
+			session.setAttribute("login", memberDto.getMemberId());
+			session.setAttribute("auth", memberDto.getMemberGrade());
+			//쿠키
+			if(remember != null) {//체크하고 로그인 했으면 -> 쿠키 발행
+				Cookie ck = new Cookie("saveId", memberDto.getMemberId());
+				ck.setMaxAge(4 * 7 * 24 * 60 * 60);//4주
+				response.addCookie(ck);
+			}
+			else {//체크안하고 로그인 했으면 -> 쿠키 삭제
+				Cookie ck = new Cookie("saveId", memberDto.getMemberId());
+				ck.setMaxAge(0);
+				response.addCookie(ck);
+			}
+			return "redirect:" + referer;
 		}
-		else {// 로그인 실패
-			return "Redirect:login?error"; 
+		else {//로그인 실패
+			return "redirect:login?error";
 		}
+	
 	}
-	
-			
-			
-	
-			
-
-	
-	
 }
