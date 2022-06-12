@@ -38,6 +38,14 @@
 			#{memberPost}, #{memberBasicAddress}, #{memberDetailAddress}
 		)
 	</insert>
+	
+	<!-- 단일조회 -->
+	<select id="one" resultType="MemberDto" parameterType="String">
+		select * from member where member_id = #{memberId}
+	</select>
+
+
+
 
 
 </mapper> 
