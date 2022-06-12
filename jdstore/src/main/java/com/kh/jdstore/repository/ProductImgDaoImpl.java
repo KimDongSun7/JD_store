@@ -20,5 +20,16 @@ public class ProductImgDaoImpl implements ProductImgDao{
 		param.put("attachmentNo", attachmentNo);
 		sqlSession.insert("productImg.insert",param);
 	}
+
+	@Override
+	public int info(int productNo) {
+		Integer attachmentNo = sqlSession.selectOne("productImg.one", productNo);
+		if(attachmentNo == null) {
+			return 0;
+		}
+		else {
+			return attachmentNo;
+		}
+	}
 	
 }

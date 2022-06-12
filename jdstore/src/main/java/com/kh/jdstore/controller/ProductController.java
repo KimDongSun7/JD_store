@@ -47,6 +47,10 @@ public class ProductController {
 	public String detail(@RequestParam int productNo, Model model) {
 		ProductDto productDto = productDao.detail(productNo);
 		model.addAttribute("productDto",productDto);
+		
+		int attachmentNo = productImgDao.info(productNo);
+		model.addAttribute("profileUrl","/attachment/download?attachmentNo=" + attachmentNo);
+		
 		return "product/detail";
 	}
 	

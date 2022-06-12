@@ -35,4 +35,8 @@
 		)
 	</insert>
 	
+	<select id="one" resultType="Integer" parameterType="int">
+		select attachment_no from product_img where product_no = #{productNo}
+	</select>
+	
  </mapper> 

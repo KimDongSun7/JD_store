@@ -8,7 +8,10 @@
 </head>
 <body>
 <h1>${productDto.productNo }번 상품</h1>
-	
+	<div>
+		<img src="${pageContext.request.contextPath}${profileUrl}"
+		width = "150" class="img img-circle img-shadow">
+	</div>
 	<div>
 		<table border="1">
 			<thead>

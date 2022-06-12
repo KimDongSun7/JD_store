@@ -41,4 +41,8 @@
 		)
 	</insert>
 	
+	<select id="one" resultType="AttachmentDto" parameterType="int">
+		select * from attachment where attachment_no = #{attachmentNo}
+	</select>
+	
  </mapper> 
