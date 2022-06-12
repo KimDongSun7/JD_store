@@ -17,6 +17,7 @@ import com.kh.jdstore.entity.ProductDto;
 import com.kh.jdstore.repository.AttachmentDao;
 import com.kh.jdstore.repository.ProductDao;
 import com.kh.jdstore.repository.ProductImgDao;
+import com.kh.jdstore.service.ProductService;
 
 @Controller
 @RequestMapping("/product")
@@ -30,6 +31,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductImgDao productImgDao;
+	
+	@Autowired
+	private ProductService productService;
 	
 	@GetMapping("/list")
 	public String list(Model model) {
@@ -55,13 +59,9 @@ public class ProductController {
 	public String insert(
 			@ModelAttribute ProductDto productDto,
 			@RequestParam MultipartFile productImg) throws IllegalStateException, IOException {
-		productDao.insert(productDto);
 		
-		//상품 이미지 추가
-		if(!productImg.isEmpty()) {//상품이미지가 있으면
-			int attachmentNo = attachmentDao.save(productImg);
-			productImgDao.insert(productDto.getProductNo(), attachmentNo);
-		}
+		productService.insert(productDto, productImg);
+		
 		return "redirect:list";
 	}
 }
