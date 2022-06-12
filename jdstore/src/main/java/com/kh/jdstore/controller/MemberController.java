@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.jdstore.entity.MemberDto;
 import com.kh.jdstore.repository.MemberDao;
@@ -46,20 +47,26 @@ public class MemberController {
 	}
 
 //	로그인 처리
-
+// 사용자 요청 헤더에 있는 Referer라는 값을 알아야 로그인 성공 후 다시 이동 시킬 수 있다 
+// - @RequestHeader("헤더이름")
 	@GetMapping("/login")
-	public String login() {
+	public String login(
+			@RequestHeader(value = "Referer", defaultValue="/") String referer,
+				Model model
+			) {  
+		model.addAttribute("referer", referer);
 		return "member/login"; 
 	}	
 	
 	@PostMapping("/login")
 	public String login(
-			String  memberId,
-			String memberPw,
+			@RequestParam String  memberId,
+			@RequestParam String memberPw,
+			@RequestParam String referer, 
 			HttpSession session) {
 		MemberDto memberDto = memberDao.login(memberId, memberPw);
 		if(memberDto != null) { //로그인 성공 
-			return "redirect:/"; 
+			return "redirect:" + referer; 
 		}
 		else {// 로그인 실패
 			return "Redirect:login?error"; 
