@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.jdstore.entity.ProductDto;
+import com.kh.jdstore.vo.ProductImgVO;
 
 @Repository
 public class ProductDaoImpl implements ProductDao{
@@ -15,7 +16,7 @@ public class ProductDaoImpl implements ProductDao{
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ProductDto> list() {
+	public List<ProductImgVO> list() {
 		
 		return sqlSession.selectList("product.list");
 	}

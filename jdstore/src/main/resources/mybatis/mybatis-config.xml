@@ -26,6 +26,7 @@
 	-->
 	<typeAliases>
 		<package name="com.kh.jdstore.entity"/>
+		<package name="com.kh.jdstore.vo"/>
 	</typeAliases>
 	
 </configuration>

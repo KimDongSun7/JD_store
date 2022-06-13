@@ -18,6 +18,7 @@ import com.kh.jdstore.repository.AttachmentDao;
 import com.kh.jdstore.repository.ProductDao;
 import com.kh.jdstore.repository.ProductImgDao;
 import com.kh.jdstore.service.ProductService;
+import com.kh.jdstore.vo.ProductImgVO;
 
 @Controller
 @RequestMapping("/product")
@@ -37,7 +38,7 @@ public class ProductController {
 	
 	@GetMapping("/list")
 	public String list(Model model) {
-		List<ProductDto> list= productDao.list();
+		List<ProductImgVO> list= productDao.list();
 		model.addAttribute("list", list);
 		
 		return "product/list";

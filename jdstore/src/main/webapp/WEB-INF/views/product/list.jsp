@@ -12,6 +12,7 @@
 	<table border="1">
 		<thead>
 			<tr>
+				<th>상품이미지</th>
 				<th>상품번호</th>
 				<th>상품이름</th>
 				<th>카테고리</th>
@@ -20,13 +21,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="productDto" items="${list}">
+			<c:forEach var="productImgVO" items="${list}">
 			<tr>
-				<td>${productDto.productNo }</td>
-				<td><a href ="detail?productNo=${productDto.productNo }">${productDto.productName }</a></td>
-				<td>${productDto.productCategory }</td>
-				<td>${productDto.productPrice }</td>
-				<td>${productDto.productStock }</td>
+				<td><img width="100px" src="${pageContext.request.contextPath}/attachment/download?attachmentNo=${productImgVO.attachmentNo}"></td>
+				<td>${productImgVO.productNo }</td>
+				<td><a href ="detail?productNo=${productImgVO.productNo }">${productImgVO.productName }</a></td>
+				<td>${productImgVO.productCategory }</td>
+				<td>${productImgVO.productPrice }</td>
+				<td>${productImgVO.productStock }</td>
 			</tr>
 			</c:forEach>
 		</tbody>
