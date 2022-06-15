@@ -36,5 +36,35 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 
-	
+	@Override
+	public MemberDto info(String memberId) {
+		return sqlSession.selectOne("member.one", memberId); 
+	}
+
+	@Override
+	public boolean changePassword(String memberId, String currentPw, String changePw) {
+		MemberDto memberDto =  this.login(memberId,  currentPw);
+		if(memberDto ==null) {
+			return false;
+		}
+		 
+		int count = sqlSession.update("member.changePassword", 
+				MemberDto.builder().memberId(memberId).memberPw(changePw).build());
+		
+		return count > 0; 
+				
+	}
+
+	@Override
+	public boolean exit(String memberId, String memberPw) {
+		MemberDto memberDto = this.login(memberId, memberPw);
+		if(memberDto == null) {
+		return false;
+		}
+		else { 
+			int count = sqlSession.delete("member.exit", memberId);
+			return count > 0;
+		}
+		
+	}
 }

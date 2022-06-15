@@ -44,9 +44,17 @@
 		select * from member where member_id = #{memberId}
 	</select>
 
-
-
-
+	<!-- 비밀번호 변경  -->
+	<update id = "changePassword" parameterType = "MemberDto">
+		update  member 
+		set member_pw = #{memberPw} 
+		where member_id = #{memberId} 
+		 
+	</update>
+		
+		<delete id ="exit" parameterType ="String">
+			delete member where member_id = #{memberId}
+		</delete>
 
 </mapper> 
 	

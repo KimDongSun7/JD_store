@@ -89,6 +89,71 @@ public class MemberController {
 		else {//로그인 실패
 			return "redirect:login?error";
 		}
+	}
 	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("login");
+		session.removeAttribute("auth");
+		return "redirect:/"; 
+	
+	}
+	
+	//MyPage 구현 
+	
+	@GetMapping("/mypage")
+	public String mypage(HttpSession session, Model model) {
+		String memberId = (String) session.getAttribute("login");
+		MemberDto memberDto = memberDao.info(memberId);
+		model.addAttribute("memberDto, memberDto");
+		return "member/mypage"; 
+	}
+	
+	/// 비밀번호 변경 
+	@GetMapping("/password")
+	public String password() { 
+	return "member/password"; 
+}
+	
+	@PostMapping("/password")
+	public String password(
+			@RequestParam String currentPw,
+			@RequestParam String changePw,
+			HttpSession session 
+			){
+			String memberId = (String)session.getAttribute("login");
+			boolean success = memberDao.changePassword(memberId, currentPw, changePw);
+			if(success) {
+				return "redirect:mypage";
+			}
+			else {
+				return "redirect:password?error"; 
+			}
+	}
+	
+	@GetMapping("/exit")
+	public String exit() {
+		return "member/exit"; 
+	}
+	
+	@PostMapping("/exit")
+	public String exit(@RequestParam String memberPw, HttpSession session) {
+	
+	String memberId = (String)session.getAttribute("login");
+	boolean success =  memberDao.exit(memberId, memberPw);
+	
+	if(success) {
+		session.removeAttribute("login");
+		session.removeAttribute("autth");
+		return "redirect:exit_finish"; 
+	}
+	else {
+		return "redirect:exit?error"; 
+	}
+}
+	
+	@GetMapping("/exit_finish")
+	public String exitFinish() {
+		return "member/exit_finish"; 
 	}
 }
