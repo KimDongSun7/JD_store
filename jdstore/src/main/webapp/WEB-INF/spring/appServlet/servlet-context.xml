@@ -50,6 +50,30 @@
 	<mvc:resources location="/resources/font/" mapping="/font/**"></mvc:resources>
 	<mvc:resources location="/resources/image/" mapping="/image/**"></mvc:resources>
 	
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path= "/product/**"/> 
+			<mvc:mapping path= "/member/**"/> 
+			<mvc:mapping path= "/board/**"/> 
+	
+				<mvc:exclude-mapping path="/member/login"/>
+				<mvc:exclude-mapping path="/member/join*"/>
+				<mvc:exclude-mapping path="/board/list"/>
+				<mvc:exclude-mapping path="/board/detail"/>
+				
+				<bean class = "com.kh.jdstore.interceptor.MemberLoginInterceptor"></bean>
+		</mvc:interceptor>
+	
+	<!-- >회원이 들어오면 안되는 비회원 페이지 -->
+	<mvc:interceptor>
+		<mvc:mapping path="/member/join*"/>
+		<mvc:mapping path ="/member/login"/>
+	
+		<bean class ="com.kh.jdstore.interceptor.NonMemberInterceptor"></bean>
+	</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<!-- 
 	파일 업로드를 위한 도구 등록
 	-(주의) 등록할 때 ID는 반드시 "multipartResolver"로 해야 한다

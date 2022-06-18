@@ -104,8 +104,9 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
 		String memberId = (String) session.getAttribute("login");
+		
 		MemberDto memberDto = memberDao.info(memberId);
-		model.addAttribute("memberDto, memberDto");
+		model.addAttribute("memberDto", memberDto);
 		return "member/mypage"; 
 	}
 	
@@ -151,9 +152,34 @@ public class MemberController {
 		return "redirect:exit?error"; 
 	}
 }
-	
+
 	@GetMapping("/exit_finish")
 	public String exitFinish() {
 		return "member/exit_finish"; 
+	}
+
+	
+	//내 정보를 조회하기 위해서 session이 필요, 정보를 넘기기 위해서 model이 필요
+	//개인정보 변경 
+	@GetMapping("/information")
+	public String information(HttpSession session, Model model) {
+		String memberId = (String) session.getAttribute("login");
+		MemberDto memberDto = memberDao.info(memberId); 
+		model.addAttribute("memberDto", memberDto);
+		return "member/information";
+	}
+	
+	@PostMapping("/information")
+	public String information(HttpSession session, @ModelAttribute MemberDto memberDto) {
+		String memberId = (String) session.getAttribute("login");
+		memberDto.setMemberId(memberId);
+
+		boolean success = memberDao.changeInformation(memberDto);
+		if(success) {
+			return"redirect:mypage"; 
+		}
+		else {
+			return "redirect:information?error"; 
+		}
 	}
 }

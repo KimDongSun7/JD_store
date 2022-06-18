@@ -67,4 +67,16 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		
 	}
+
+	@Override
+	public boolean changeInformation(MemberDto memberDto) {
+		MemberDto findDto = this.login(memberDto.getMemberId(), memberDto.getMemberPw());
+		if(findDto == null) {
+			return false;
+		}
+		else {
+		int count = sqlSession.update("member.changeInformation", memberDto); 
+		return count > 0; 
+		}
+	}
 }
