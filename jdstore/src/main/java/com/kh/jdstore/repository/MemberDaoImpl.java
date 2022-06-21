@@ -14,7 +14,7 @@ public class MemberDaoImpl implements MemberDao {
 	
 	@Override
 	public void join(MemberDto memberDto) {
-		// TODO Auto-generated method stub
+			sqlSession.insert("member.join", memberDto);
 		
 	}
 // String memberPw 는 사용자가 입력한 비밀번호 

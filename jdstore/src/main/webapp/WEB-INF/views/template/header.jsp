@@ -47,7 +47,7 @@
        
         		
         		<li>
-        			<a href="#">상품관리</a>
+        			<a href="${root }/product/">상품관리</a>
         			<ul>
         				<li><a href="${root}/product/list">목록보기</a></li>
         				<li><a href="${root}/product/insert">등록하기</a></li>

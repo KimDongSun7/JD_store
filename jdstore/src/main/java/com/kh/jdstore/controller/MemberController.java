@@ -28,6 +28,7 @@ public class MemberController {
 	@Autowired 
 	private MemberDao memberDao; 
 	
+	//회원가입 
 	@GetMapping("/join")
 	public String join() {
 		return "member/join"; 	
