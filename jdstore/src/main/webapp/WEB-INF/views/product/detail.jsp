@@ -34,5 +34,11 @@
 			</tbody>
 		</table>
 	</div>
+	<div>
+		<button>구매</button>
+	</div>
+	<div>
+		<button>장바구니</button>
+	</div>
 </body>
 </html>

@@ -50,7 +50,8 @@ public class ProductController {
 		model.addAttribute("productDto",productDto);
 		
 		int attachmentNo = productImgDao.info(productNo);
-		model.addAttribute("profileUrl","/attachment/download?attachmentNo=" + attachmentNo);
+		//컨트롤러 필요
+		model.addAttribute("profileUrl","/attach/download?attachNo=" + attachmentNo);
 		
 		return "product/detail";
 	}
